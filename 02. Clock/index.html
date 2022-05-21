@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title >CLOCK</title>
+    </head>
+    <body>
+<div class="clock">
+    <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+    </div>
+</div>
+
+<style>
+    html{
+        background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=5) ;
+        background-size:cover;
+        font-family: 'helvetica neue';
+        text-align: center;
+        font-size: 10px;
+    }
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 10;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 10px solid rgba(248, 50, 50,0.9);
+      border-radius:30% ;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(9, 243, 114, 0.9);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hour-hand {
+      width: 35%;
+      left:15%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+    .min-hand {
+      width: 40%;
+      left: 10%;
+      height: 2px;
+      background: chocolate;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+    .second-hand {
+      width: 50%;
+      height: 2px;
+      background: goldenrod;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+</style>
+<script>
+    const secondHand = document.querySelectorAll('.second-hand'); 
+    const minsHand = document.querySelectorAll('.min-hand');
+    const hourHand = document.querySelectorAll('.hour-hand');
+
+    function setDate(){
+      const now = new Date();
+
+      const seconds = now.getSeconds();
+      const secondsDegrees = ((seconds /60 )* 360) + 90;
+      secondHand[0].style.transform = `rotate(${secondsDegrees}deg)`;
+      
+
+
+      const mins = now.getMinutes();
+      const minsDegrees = ((mins/60)*360)+90;
+      minsHand[0].style.transform = `rotate(${minsDegrees}deg)`;
+
+
+      const hour = now.getHours();
+      const hourDegrees = ((hour/12)*360)+90;
+      hourHand[0].style.transform = `rotate(${hourDegrees}deg)`;
+     
+
+    }
+   setInterval(setDate,1000);
+
+   setDate();
+</script>
+    </body>
+</html>
